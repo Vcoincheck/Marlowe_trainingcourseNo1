@@ -7,16 +7,16 @@
 
 # Tóm tắt:
 # I. Tiền ký quỹ và thế chấp:
-  # Bên A gửi tổng cộng 1100 ADA (1000 ký quỹ + 100 thế chấp).
-  # Bên B gửi 100 ADA tiền thế chấp.
+  # Bên Mua gửi tổng cộng 1100 ADA (1000 ký quỹ + 100 thế chấp).
+  # Bên Bán gửi 100 ADA tiền thế chấp.
 
 # II. Xử lý tranh chấp:
   # Nếu Bên_Trung_Gian chọn 0:
-    # Bên A thua, tiền thế chấp của Bên A (100 ADA) được chuyển cho Bên_Trung_Gian.
-    # Bên B nhận tiền ký quỹ (1000 ADA).
+    # Bên Mua thua, tiền thế chấp của Bên Mua (100 ADA) được chuyển cho Bên_Trung_Gian.
+    # Bên Bán nhận tiền ký quỹ (1000 ADA) và hoàn trả tiền thế chấp (100 ADA) về ví.
   # Nếu Bên_Trung_Gian chọn 1:
-    # Bên B thua, tiền thế chấp của Bên B (100 ADA) được chuyển cho Bên_Trung_Gian.
-    # Bên A nhận lại tiền ký quỹ (1000 ADA) và tiền thế chấp (100 ADA)
+    # Bên Bán thua, tiền thế chấp của Bên Bán (100 ADA) được chuyển cho Bên_Trung_Gian.
+    # Bên Mua nhận lại tiền ký quỹ (1000 ADA) và tiền thế chấp (100 ADA)
 
 # III. Trường hợp không có tranh chấp:
   # Nếu không có lựa chọn từ Bên_Trung_Gian, hợp đồng tự động hoàn trả:
