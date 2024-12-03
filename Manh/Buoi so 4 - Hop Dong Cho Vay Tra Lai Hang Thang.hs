@@ -14,21 +14,8 @@ nguoiVayTien = Role "NguoiVayTien"
 --Các tham số dùng trong hợp đồng
 soTienGoc = ConstantParam "SoTienGoc"
 phanTramLaiSuat = Constant 5
-tienLai = (DivValue
-        (MulValue
-            soTienGoc
-            phanTramLaiSuat
-        )
-        (Constant 100)
-    )
-
-tienGocVaLai = (DivValue
-        (MulValue
-            soTienGoc
-            (AddValue phanTramLaiSuat (Constant 100))
-        )
-        (Constant 100)
-    )
+tienLai = DivValue (MulValue soTienGoc phanTramLaiSuat) (Constant 100)
+tienGocVaLai = DivValue (MulValue soTienGoc (AddValue phanTramLaiSuat (Constant 100))) (Constant 100)
 
 thoiHanChuyenTienGoc = (TimeParam "ThoiHanChuyenTienGoc")
 thoiHanTraLaiLan1 = (TimeParam "ThoiHanTraLaiLan1")
