@@ -8,7 +8,7 @@ main = printJSON example
 
 
 -- Các bên tham gia vào hợp đồng
-nguoiChoVay = Role "NguoiVayTien"
+nguoiChoVay = Role "NguoiChoTien"
 nguoiVayTien = Role "NguoiVayTien"
 
 --Các tham số dùng trong hợp đồng
