@@ -1,0 +1,44 @@
+{-# LANGUAGE OverloadedStrings #-}
+
+module Example where
+
+import Language.Marlowe.Extended.V1
+import Data.String
+
+-- Các tham số đã được tham số hóa
+congTy           = (Role "Phongtaichinhcongty")
+soLuongNhanVien  = 100
+tienLuongNhanVien = 2000 * 1000000
+thoiGianTraLuong = 1736132589000 -- Thời gian trả lương cho nhân viên (bạn có thể thay đổi tham số này)
+thoiGianNapTien  = 1722507480000 -- Thời gian nạp tiền vào hợp đồng (bạn có thể thay đổi tham số này)
+
+-- Hàm đệ quy trả lương nhân viên thứ tự từ 1 đến n
+myPayment :: Integer -> Contract
+myPayment index | index > soLuongNhanVien = Close
+myPayment index = Pay
+                congTy
+                (Party (fromString ("nhanvien_" ++ show index)))
+                (Token "" "")
+                (Constant tienLuongNhanVien)
+                (myPayment (index + 1))
+
+main :: IO ()
+main = printJSON example
+
+-- Define a contract, Close is the simplest contract which just ends the contract straight away
+example :: Contract
+example = When
+    [Case
+        (Deposit
+            congTy
+            congTy
+            (Token "" "")
+            (Constant (soLuongNhanVien * tienLuongNhanVien))
+        )
+        (When
+            []
+            thoiGianNapTien
+            (myPayment 1)
+        )]
+    thoiGianTraLuong Close
+
