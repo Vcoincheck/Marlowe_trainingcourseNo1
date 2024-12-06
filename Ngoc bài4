@@ -1,1 +1,72 @@
-{"when":[{"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien1"}},"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien2"}},"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien3"}},"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien4"}},"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien5"}},"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien6"}},"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien7"}},"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien8"}},"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien9"}},"then":{"token":{"token_name":"","currency_symbol":""},"to":{"party":{"role_token":"nhanvien10"}},"then":"close","pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"pay":1000000000,"from_account":{"role_token":"doanhnghiep"}},"case":{"party":{"role_token":"doanhnghiep"},"of_token":{"token_name":"","currency_symbol":""},"into_account":{"role_token":"doanhnghiep"},"deposits":10000000000}}],"timeout_continuation":"close","timeout":1733582820000}
+{-# LANGUAGE OverloadedStrings #-}
+module Example where
+
+import Language.Marlowe.Extended.V1
+
+main :: IO ()
+main = printJSON example
+
+
+{- Define a contract, Close is the simplest contract which just ends the contract straight away
+-}
+
+chodoanhnghiepdeposit = (TimeParam "time_param")
+
+doanhnghiep = (Role "doanhnghiep")
+tongtienluong = (ConstantParam "tienluong")
+luongthuclanh = (Constant 1000000000)
+
+thanhtoan vinhanvien  = Pay
+            doanhnghiep
+            vinhanvien
+            ada
+            luongthuclanh
+
+vinhanvien1 = (Party (Role "nhanvien1"))
+vinhanvien2 = (Party (Role "nhanvien2"))
+vinhanvien3 = (Party (Role "nhanvien3"))
+vinhanvien4 = (Party (Role "nhanvien4"))
+vinhanvien5 = (Party (Role "nhanvien5"))
+vinhanvien6 = (Party (Role "nhanvien6"))
+vinhanvien7 = (Party (Role "nhanvien7"))
+vinhanvien8 = (Party (Role "nhanvien8"))
+vinhanvien9 = (Party (Role "nhanvien9"))
+vinhanvien10 = (Party (Role "nhanvien10"))
+
+
+
+
+
+
+example :: Contract
+example = When
+    [Case
+        (Deposit
+            doanhnghiep
+            doanhnghiep
+            ada
+            tongtienluong
+        )
+        (thanhtoan vinhanvien1
+            (thanhtoan vinhanvien2     
+                (thanhtoan vinhanvien3 
+                    (thanhtoan vinhanvien4
+                        (thanhtoan vinhanvien5
+                           (thanhtoan vinhanvien6
+                                (thanhtoan vinhanvien7
+                                    (thanhtoan vinhanvien8    
+                                        (thanhtoan vinhanvien9
+                                            (thanhtoan vinhanvien10
+                                                Close 
+                                            )
+                                        )    
+                                    )      
+                                )    
+                            ) 
+                        )      
+                    )    
+                )         
+            )
+        )]
+    chodoanhnghiepdeposit
+    Close 
