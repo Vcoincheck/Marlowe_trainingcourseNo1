@@ -27,19 +27,6 @@ import {
     const quyLuongCongty = ConstantParam('soTienGoc')
     const luongNhanVien = DivValue(quyLuongCongty, danhSachNhanVien.length)
 
-    function hopDongTraLuong(nhanVien): Contract {
-        return When([
-            Case(
-                Deposit(taiKhoanCongTy, nhanVien, lovelace, luongNhanVien),
-                Pay(nhanVien, Party(nhanVien), lovelace, AvailableMoney(lovelace, nhanVien), Close)
-            ),
-            Case(
-                Deposit(taiKhoanCongTy, nhanVien, lovelace, luongNhanVien),
-                Pay(nhanVien, Party(nhanVien), lovelace, AvailableMoney(lovelace, nhanVien), Close)
-            ),
-
-        ], thoiHanTraLuong, Close)
-    }
     function traLuongChoNhanVien(): Contract {
         const danhSachTraLuong: Case[] = [];
         for (let i = 0; i < danhSachNhanVien.length; i++) {
