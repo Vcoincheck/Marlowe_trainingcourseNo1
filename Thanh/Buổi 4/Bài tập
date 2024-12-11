@@ -24,7 +24,7 @@ import {
 
     const thoiHanTraLuong = TimeParam('thoiHanTraLuong')
     const danhSachNhanVien = [nhanVien1, nhanVien2, nhanVien3, nhanVien4, nhanVien5, nhanVien6, nhanVien7, nhanVien8, nhanVien9, nhanVien10]
-    const quyLuongCongty = ConstantParam('soTienGoc')
+    const quyLuongCongty = ConstantParam('quyLuongCongty')
     const luongNhanVien = DivValue(quyLuongCongty, danhSachNhanVien.length)
 
     function traLuongChoNhanVien(): Contract {
