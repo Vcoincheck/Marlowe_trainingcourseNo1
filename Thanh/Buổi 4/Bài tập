@@ -34,8 +34,8 @@ import {
             danhSachTraLuong.push(
                 Case(
                     Deposit(
-                        taiKhoanCongTy,
                         nhanVien,
+                        taiKhoanCongTy,
                         lovelace,
                         luongNhanVien
                     ),
