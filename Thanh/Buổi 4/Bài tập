@@ -1,0 +1,71 @@
+import {
+    Address, Role, Account, Party, ada, lovelace, AvailableMoney, Constant, ConstantParam,
+    NegValue, AddValue, SubValue, MulValue, DivValue, ChoiceValue, TimeIntervalStart,
+    TimeIntervalEnd, UseValue, Cond, AndObs, OrObs, NotObs, ChoseSomething,
+    ValueGE, ValueGT, ValueLT, ValueLE, ValueEQ, TrueObs, FalseObs, Deposit,
+    Choice, Notify, Close, Pay, If, When, Let, Assert, SomeNumber, AccountId,
+    ChoiceId, Token, ValueId, Value, EValue, Observation, Bound, Action, Payee,
+    Case, Timeout, ETimeout, TimeParam, Contract
+} from 'marlowe-js';
+
+(function (): Contract {
+
+    const taiKhoanCongTy = Role('taiKhoanCongTy')
+    const nhanVien1 = Role('nhanVien1')
+    const nhanVien2 = Role('nhanVien2')
+    const nhanVien3 = Role('nhanVien3')
+    const nhanVien4 = Role('nhanVien4')
+    const nhanVien5 = Role('nhanVien5')
+    const nhanVien6 = Role('nhanVien6')
+    const nhanVien7 = Role('nhanVien7')
+    const nhanVien8 = Role('nhanVien8')
+    const nhanVien9 = Role('nhanVien9')
+    const nhanVien10 = Role('nhanVien10')
+
+    const thoiHanTraLuong = TimeParam('thoiHanTraLuong')
+    const danhSachNhanVien = [nhanVien1, nhanVien2, nhanVien3, nhanVien4, nhanVien5, nhanVien6, nhanVien7, nhanVien8, nhanVien9, nhanVien10]
+    const quyLuongCongty = ConstantParam('soTienGoc')
+    const luongNhanVien = DivValue(quyLuongCongty, danhSachNhanVien.length)
+
+    function hopDongTraLuong(nhanVien): Contract {
+        return When([
+            Case(
+                Deposit(taiKhoanCongTy, nhanVien, lovelace, luongNhanVien),
+                Pay(nhanVien, Party(nhanVien), lovelace, AvailableMoney(lovelace, nhanVien), Close)
+            ),
+            Case(
+                Deposit(taiKhoanCongTy, nhanVien, lovelace, luongNhanVien),
+                Pay(nhanVien, Party(nhanVien), lovelace, AvailableMoney(lovelace, nhanVien), Close)
+            ),
+
+        ], thoiHanTraLuong, Close)
+    }
+    function traLuongChoNhanVien(): Contract {
+        const danhSachTraLuong: Case[] = [];
+        for (let i = 0; i < danhSachNhanVien.length; i++) {
+            let nhanVien = danhSachNhanVien[i];
+            danhSachTraLuong.push(
+                Case(
+                    Deposit(
+                        taiKhoanCongTy,
+                        nhanVien,
+                        lovelace,
+                        luongNhanVien
+                    ),
+                    Pay(
+                        taiKhoanCongTy,
+                        Party(nhanVien),
+                        lovelace,
+                        luongNhanVien,
+                        Close
+                    )
+                )
+            );
+        }
+        return When(
+            danhSachTraLuong
+        , thoiHanTraLuong, Close)
+    }
+
+    return traLuongChoNhanVien()
+})
