@@ -26,15 +26,20 @@ import {
     function traLuong(nguoiGui, nguoiNhan, buocTiepTheo): Contract {
         return Pay(nguoiGui, Party(nguoiNhan), lovelace, tinhLuong, buocTiepTheo)
     }
-    const hopDong = When(Case(Deposit(nguoiTraLuong, nguoiTraLuong, lovelace, nguonTien), ))
-                        
-
-
-                         
-                    ngayNopTien
-                    Close
-                        
-
+   const hopDong = When(
+                        [case(
+                            Deposit(
+                                nguoiTraLuong,
+                                nguoiTraLuong,
+                                lovelace,
+                                nguonTien
+                            ),
+                            traLuong(nguoiTraLuong, nhanVien1, 
+                                traLuong(nguoiTraLuong, nhanVien2,
+                                    traLuong(nguoiTraLuong, nhanVien3, Close 
+                        )],
+                        ngayNopTien, Close
+                    )
     return Close;
 
 
