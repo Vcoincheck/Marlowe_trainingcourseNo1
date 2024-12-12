@@ -27,32 +27,37 @@ import {
     const quyLuongCongty = ConstantParam('quyLuongCongty')
     const luongNhanVien = DivValue(quyLuongCongty, danhSachNhanVien.length)
 
-    function traLuongChoNhanVien(): Contract {
-        const danhSachTraLuong: Case[] = [];
-        for (let i = 0; i < danhSachNhanVien.length; i++) {
-            let nhanVien = danhSachNhanVien[i];
-            danhSachTraLuong.push(
-                Case(
-                    Deposit(
-                        nhanVien,
-                        taiKhoanCongTy,
-                        lovelace,
-                        luongNhanVien
-                    ),
-                    Pay(
-                        nhanVien,
-                        Party(nhanVien),
-                        lovelace,
-                        luongNhanVien,
-                        Close
-                    )
+    function traLuongNhanVien (index: number,  buocTiepTheo: Contract): Contract {
+        return Pay(
+                    taiKhoanCongTy,
+                    Party(danhSachNhanVien[index]),
+                    lovelace,
+                    luongNhanVien,
+                    buocTiepTheo
                 )
-            );
-        }
-        return When(
-            danhSachTraLuong
-        , thoiHanTraLuong, Close)
     }
 
-    return traLuongChoNhanVien()
+    function hopDongTraLuong(index): Contract {
+        // Trả đến nhân viên cuối cùng
+        if (index == danhSachNhanVien.length - 1) {
+            return traLuongNhanVien(index, Close)    
+        }
+        return traLuongNhanVien(index, hopDongTraLuong(index + 1)) 
+    }
+
+    const thucHienHopDong = When(
+            [Case(
+                Deposit(
+                        taiKhoanCongTy,
+                        taiKhoanCongTy,
+                        lovelace,
+                        quyLuongCongty
+                    ),
+                hopDongTraLuong(0)
+            )]
+        , thoiHanTraLuong, Close)
+
+    return thucHienHopDong
+
+
 })
