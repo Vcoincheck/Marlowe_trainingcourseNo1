@@ -1,2 +1,41 @@
 Trả lương cho 10 nhân viên công ty Blockly
 link: https://playground.marlowe-lang.org/#/importContract?marlowe-view=editor&contract=N4Ig7gFgpgdiBcBtUAXad6krBiC6ANCCgJYC2UA9gK4oD6AxpTKTNQIanMKqUDWOTMX6w6MdhQQgQRBtQBO82AwCedAM4qyAI0oAbKSAC%2BRFJR4gADu3koVF%2Bfqh0zAjCBgR2MAGolYAIzGJsToFq6CvG5iElCGsgpKMKoaWroG8NIhZhbWtvZCjnrOEe6e3n6wAEzBpmFCpeEiMDGSmTIgcorKapo6%2BobZ5kJ5dg5OLs1S5b7%2BMADMtaGCnXqU6nFE1gWgACYkAG4ku3EN5FDqCAEADERk1Hqklno7nczqKN70eRJSAI7UFQAGWozAA5kttAUbtcQgAzRxkOjsBhMagscbFSZuKQMCDUAAilG8EAAcmCIP5LEtthZ9kcTuFzpd4Dc7g8ni8LEwYB8vnQfmR-oCQeDIdDrrCiAjKEiUWiMYUJo1MnjCcTPOTKVBqUYQrShPTjqdUMyrrcQPdHiRnq8eXyWAKbL9MgDgaCYBC9UQoeapSAZXLUTRFaAiiUpqr8USSVqqUtSBQaCgmRQnfIXR4wexgSRPKLPUsGOwNrkbGMlViVZ1oxqyRT4yFKHDsZFhNFxG1pAluslemkBu0QnmzMjg%2BiU5WIzio%2BrYw2dcYiCdLOsSCgWaB7Z9HYLhe6xXqjIRiOdk4xmKwOFx3Aw1qXTGfaKnnHvMjBKJYACpzAteoxAA
+Trả lương cho 10 nhân viên công ty Javascript
+import {
+    Address, Role, Account, Party, ada, lovelace, AvailableMoney, Constant, ConstantParam,
+    NegValue, AddValue, SubValue, MulValue, DivValue, ChoiceValue, TimeIntervalStart,
+    TimeIntervalEnd, UseValue, Cond, AndObs, OrObs, NotObs, ChoseSomething,
+    ValueGE, ValueGT, ValueLT, ValueLE, ValueEQ, TrueObs, FalseObs, Deposit,
+    Choice, Notify, Close, Pay, If, When, Let, Assert, SomeNumber, AccountId,
+    ChoiceId, Token, ValueId, Value, EValue, Observation, Bound, Action, Payee,
+    Case, Timeout, ETimeout, TimeParam, Contract
+} from 'marlowe-js';
+
+(function (): Contract {
+
+    const nguoiTraLuong = Role ("chuDoanhNghiep");
+    const nhanVien1 = Role ("nhanVien1");
+    const nhanVien2 = Role ("nhanVien2");
+    const nhanVien3 = Role ("nhanVien3");
+    const nguonTien = Constant ("quyLuong");
+    const ngayNopTien = TimeParam ("nopTienLuong");
+    const ngayLinhLuong = TimeParam ("ngayLinhLuong");
+    const tyLeLuong = Constant (10n);
+    const tinhLuong = DivValue (MulValue(nguonTien, tyLeLuong), Constant(100n));
+
+    function traLuong(nguoiGui, nguoiNhan, buocTiepTheo): Contract {
+        return Pay(nguoiGui, Party(nguoiNhan), lovelace, tinhLuong, buocTiepTheo)
+    }
+    const hopDong = When(Case(Deposit(nguoiTraLuong, nguoiTraLuong, lovelace, nguonTien), ))
+                        
+
+
+                         
+                    ngayNopTien
+                    Close
+                        
+
+    return Close;
+
+
+})
