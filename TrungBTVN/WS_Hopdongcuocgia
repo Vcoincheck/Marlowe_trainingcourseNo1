@@ -1,0 +1,227 @@
+Hợp đồng Cược giá lấy dữ liệu oracle tìm người chiến thắng: 
+Người tham gia deposit một số tiền vào ví nội bộ, sau đó đoán giá của ADA hoặc một token nào có dữ liệu trên oracle. Tiếp theo đợi đến khoảng thời gian lấy giá và so sánh ai đoán đúng hoặc gần giá nhất được nhận toàn bộ số tiền từ mọi người tham gia chuyển vào. Trường hợp đoán cùng giá thì ai đoán trước sẽ là người chiến thắng.
+
+
+Link blockly đối với trường hợp 3 người chơi chọn lần lượt theo thứ tự
+
+https://playground.marlowe-lang.org/#/importContract?marlowe-view=editor&contract=N4Ig7gFgpgdiBcBtUAXad6krByRp03HV1RKOwzwIy3OvLsIcKaoF0AafASwFsoAewCuKAPoBjQTBQ8YwgIazpCNqXyMNrLbXyCA1tpQHYYmAoEIQIbhOEAne7AkBPMQGcXfAEaCANlYgAL7cxqogAA4K9igu4fb%2BUGLGhhggAELBITrhKUYmMGYWUIG2Dk4wrh5evgHw1tlhRFExcUQJfkl5aZlBjeQgEn6C7iXcUW2o-FDuCACMAAxLy9x8wn6yEX6Tg9LuKAoyYi0WVgDK-sLSAOYAggAit1ncAGYJfGIKElLCMvGJyQKVnuz0iCh2sgEs3gi2WS1W60223CUhg%2B0O4hOfHOlxuDyefVe70%2B3xEf3aAO6VgAwqCeC9wgA3BR%2BYQlIg0Jkstlc1lJQQvSQQQQ8CTs0ASYWi-lgGBQez-TqA1LA4K2KVioqWer3AAE1OFcEJID4cmE0NAzL5YgFQpFYpRGplcoVFKVVPqAAV7NK%2BNFDCg1YMnVr2SAAPL2L6dLLZem8nlEK1sm2CyX28XBjM22XyxVdIE6oPp6Wh4H6w2g65dCCHBP8tNOx3ZwS512gDoFlVen1iv32APFkPmbURqNDEp9bJQPyjev11N26XN0utl355WEEDe33%2BqCB7IlzUjsOR6OT7Km%2BQWkDJhtLh1EI-OvNurtbkGH4fFcsGlRT7Jq2SWtdE5JNuUzO9F2fFdNTXV8O0pQsMiHbMTysdIK3-S8zRvKDbRgp8Q3g9sQE7Tc0h3Ps9wPdU0J-eozwnWNuHjcC%2BQXAimyIls2w3D0UK-ejR0wv8jUAms63YlMuIzWCX1I8iBKoqB%2B0HITS3QxjxxjKduBnOdpMgiDoO4iViL4t8KKsFS1P3VDNIYsdz1BK9zU4xs5J41dLMQ91kN6OjHJErDxL0kADMzD1UAKMt6hsQZymcNxPB8fxAkaQRwhaWJ%2BOQz9%2BnybsYtSOLrDKRxkuqNK6gaUIsuaaJcqsgSCtCAYhhGMYwQhaZoVhOEEQ2Hgth2VF0SOLEcVZPFHlBN5BA%2BL4fnJPz3zSWljQmXI%2BvmOF4RNRERuRJ89gOSbolOeoLhmmA7jm40FqW0lfkDFqApYkA2MtCDck0O8PIfTNnxzdd3u7EBNqC48nOpULXNwwHCPM3iwbW6ye13Ad7I0mHRyY3TjW%2B29fqM0yvJRny0bIpCIahrNgrDOGxKrSTdHwzzl28uDfJp-yIdsmiHLx08dIvadZ2MjiydkrnKZ56mlOQwXsdohmRasAmL1WRGZc5x95YUvK6eFpItMh%2BGAO4IC0CkshtABvWgfk0GEL59aMNNsrRMrY03LwkzZYN9WjfBrcVfU6GzacrXPuJx2futIPgYsxXaa3QKQ%2B9y2JOAu2SaT-WU9Rt2lYF3tVKF3Ho-xsXPsi%2BcneRrOSON8OK7stWQfN2O-d1xOZKLl3W7DnovfNn3sPChuOU0aK9FK82ErsSrKhSmp0vizLsqanYy63TbCtAwsStMJeKoqKpUtqDL6p31o2420EwMGYY53GcEdqhPb9qGpExrOhiY4l1sTXVxHdfE81iTLTJG9dGAlejZG2hyXaMJ9oLD-sdABaJzqYhAdNK4ECHrZCeiSFacD3YYxAG1L6DIjJ-QdqTAe95m4gxHvA-K48nJ6hZn3a8SMzIt15vvSiHcq5RzKr3ImdDmECIpkItO-MPxcNHDw32udbbs0DkPbmocOHlyxpHLOPc67T0lo3Zh5M5YKNLunURhicYSJMS5Ph7km6CLYcIuxqpq5lTUVPDRIEGFaOlpY5Ow8vFKKfr482zN1E634e4%2BRnjFEe0xtRVWKjRYuOkRYgug9na6Ndopbx9R6bd1hjna2bM5HWJSbYqJNkxGZJiTHUxxoZ6yKSXU1ODS0nbmaUYiptcckJLcWEnRhtimPxpFkmkOczGGVPsfReTll5JTXtVG%2BW876NQfqPHxR9cgnwXmfNZF8qrX03nVPQ99mr6OUcaF%2BnV349S-jMH%2Bg1DrDVGiiQBF0oygJADdQh90CQkOgS9ValCEGgmQVMb%2BaDf7fP-n8nBQCppgNumCqBi0yGwJmWU2Mh4FBLJAC8QQ9hClTPYTC5WgzHHGLaS4uiXUxDeH3GAKAzAYqfPQSscl7x5hBHYH0LgvABAiHEKiWQ8glA8BUPUF53VIRCFEO84BgKrAABUpQAHEeCHAADLggNQoAAslXRo0wpUasxSAXVIpriGpgAAExFAGAAjooUEEhSWZgpVS1hvSSmNKLK01RltWWjHZZy7lVBeVIv5QKp6wrRUitCDa0QkhpCysUMoNIyqEqqttSggQmqroOv1S6%2B4vCSVksDdSmxob%2BnlO-KOOJ-5o1JA5SgLlPLblJuTRgwVi001iszZK7NMqzTysVa-Lqxas0UNVRWoFjqeBmpgNSOtth-XhEbcGkuLaqGZ2GWGSeRpu2xr7fG9QTQBrDqJGOmEIqJ0SrVdK3Ns6C1WCLZOz9dr8H1A3Vu9Iu7Bj7r2fculENPzcFtPPboZV1mryvhvWqQY5DGHxa9Ql1CgyuqgBEEYPAUA3lVf1dBmDfmnXRQCytILZrgvfSW6d365W-qVW-FVy6gNapA1KAAEoce4MBBARFkDgY0fqyU5T3qUyGQZEMnOQ%2BfRKaH141Vvl9GQghcPQpEbM7IRGSPuDIxR1Bj6DprB%2BSdCU-y8ECeBeAnFAFxVsa-TIH9CrC08aXVOld0w106uE4cak4nJM8Gk-WzM8n8OZxU8VU5hR1Mr0vlp7ZNzsP6ZgXhg59RM6mdI%2BR95VHkW2dRXRiaTnGOucge5gDUqc3ec475v9-mmvqrLUke1G6RMwHSJFqT4kgA
+
+
+Viết với nhiều người chơi trong Haskell 
+
+Phân Tích Chương Trình
+1. Đầu Vào
+Số lượng người chơi: soluongnguoichoi được định nghĩa là 4. Danh sách người chơi được tạo tự động bằng cách ghép chuỗi "nguoichoi" với số thứ tự (1..soluongnguoichoi).
+Giá thị trường từ Oracle (oraclePrice): Giá trị thực tế được cung cấp từ một Oracle thông qua Choice.
+2. Hoạt Động
+Bước 1: Người chơi nộp tiền
+Hàm nguoichoinoptien:
+Lặp qua từng người chơi trong danh sách danhsachnguoichoi.
+Yêu cầu từng người chơi nộp một số lượng ADA (được tính bằng SoluongADA * 1000000).
+Nếu một người không nộp tiền trước thời hạn (TimeParam "ThoiHanDeposit"), hợp đồng sẽ đóng (Close).
+Bước 2: Người chơi đoán giá
+Hàm nguoichoidoangia:
+Cho phép từng người chơi đưa ra dự đoán giá thông qua Choice.
+Lưu các dự đoán (gồm tên người chơi và giá trị đoán) vào danh sách doangia.
+Nếu không ai đưa ra dự đoán trước thời hạn (TimeParam "ThoiHandoangia"), hợp đồng sẽ đóng (Close).
+Bước 3: Xác định người chiến thắng
+Hàm xacdinhnguoichienthang:
+Tiêu chí thắng:
+Giá trị dự đoán gần nhất với giá trị Oracle (oraclePrice).
+Nếu có nhiều người đoán bằng khoảng cách, ưu tiên người đoán trước.
+Nếu có người đoán chính xác (giadoan = oraclePrice), người đó sẽ thắng.
+So sánh giá trị dự đoán:
+Tính trị tuyệt đối của chênh lệch giữa giá trị đoán và giá trị Oracle bằng hàm hieutrituyetdoi.
+Tìm khoảng cách nhỏ nhất trong danh sách các giá trị đoán (minhieutrituyetdoi).
+Duyệt qua danh sách dự đoán để tìm người chiến thắng (ưu tiên người đoán trước).
+Trả thưởng:
+Người thắng cuộc sẽ nhận toàn bộ số tiền từ các người chơi khác thông qua hàm payAll.
+-------------------------------
+
+{-# LANGUAGE OverloadedStrings #-}
+module Example where
+
+import Language.Marlowe.Extended.V1
+import Plutus.V1.Ledger.Value (TokenName(..))
+import Data.String (IsString(..))
+
+main :: IO ()
+main = printJSON example
+
+soluongnguoichoi :: Int
+soluongnguoichoi = 4  -- Điền số lượng người tham gia đoán giá
+
+danhsachnguoichoi :: [String]
+danhsachnguoichoi = ["nguoichoi" ++ show i | i <- [1..soluongnguoichoi]]
+
+example :: Contract
+example = nguoichoinoptien danhsachnguoichoi
+  where
+    nguoichoinoptien :: [String] -> Contract
+    nguoichoinoptien [] = nguoichoidoangia danhsachnguoichoi []
+    nguoichoinoptien (roleName:remaining) = When
+        [Case
+            (Deposit (Role (TokenName (fromString roleName))) 
+                     (Role (TokenName (fromString roleName))) 
+                     (Token "" "") 
+                     (MulValue
+                        (ConstantParam "SoluongADA")
+                        (Constant 1000000)
+                     ))
+            (nguoichoinoptien remaining)
+        ]
+        (TimeParam "ThoiHanDeposit")
+        Close
+-- nguoi tham gia đoán giá
+    nguoichoidoangia :: [String] -> [(String, Value)] -> Contract
+    nguoichoidoangia [] doangia = When
+        [Case
+            (Choice (ChoiceId "Oracle" (Role (TokenName (fromString "Pricemarket")))) [Bound 1 1000000000000])
+            (xacdinhnguoichienthang doangia (ChoiceValue (ChoiceId "Oracle" (Role (TokenName (fromString "Pricemarket"))))))
+        ]
+        (TimeParam "ThoiHanOracle")
+        Close
+    nguoichoidoangia (roleName:remaining) doangia = When
+        [Case
+            (Choice (ChoiceId (fromString (roleName ++ " doangia")) 
+                              (Role (TokenName (fromString roleName)))) 
+                    [Bound 1 1000000000000])
+            (nguoichoidoangia remaining ((roleName, ChoiceValue (ChoiceId (fromString (roleName ++ " doangia")) 
+                                                          (Role (TokenName (fromString roleName))))) : doangia))
+        ]
+        (TimeParam "ThoiHandoangia")
+        Close
+-- tìm người chiến thắng
+    xacdinhnguoichienthang :: [(String, Value)] -> Value -> Contract
+    xacdinhnguoichienthang doangia oraclePrice = foldl (flip sosanhNguoiChoi) Close doangia --ưuu tiên người đoán trước 
+      where
+        sosanhNguoiChoi :: (String, Value) -> Contract -> Contract
+        sosanhNguoiChoi (roleName, giadoan) nextContract = If
+            (OrObs
+                (ValueEQ (hieutrituyetdoi giadoan oraclePrice) (minhieutrituyetdoi doangia oraclePrice)) -- Gần nhất
+                (ValueEQ giadoan oraclePrice) -- Đúng giá trị Oracle
+            )
+            (payAll roleName) -- Người chiến thắng
+            nextContract -- Tiếp tục kiểm tra
+
+        -- Tính trị tuyệt đối chênh lệch
+        hieutrituyetdoi :: Value -> Value -> Value
+        hieutrituyetdoi x y = Cond (ValueGT (SubValue x y) (Constant 0))
+                                      (SubValue x y)
+                                      (SubValue y x)
+
+        -- Tìm khoảng cách nhỏ nhất
+        minhieutrituyetdoi :: [(String, Value)] -> Value -> Value
+        minhieutrituyetdoi nguoidoangia oracle = foldr1 (\v1 v2 -> Cond (ValueLT v1 v2) v1 v2) (map (\(_, g) -> hieutrituyetdoi g oracle) nguoidoangia)
+
+        -- Thanh toán toàn bộ số tiền cho người chiến thắng
+        payAll :: String -> Contract
+        payAll winner = foldr chuyentien Close danhsachnguoichoi
+          where
+            chuyentien :: String -> Contract -> Contract
+            chuyentien nguoichoi nextContract = Pay
+                (Role (TokenName (fromString nguoichoi))) -- Người tham gia
+                (Party (Role (TokenName (fromString winner)))) -- Người chiến thắng
+                (Token "" "") -- Token chuyển
+                (MulValue
+                    (ConstantParam "SoluongADA") -- Số lượng ADA mà mỗi người tham gia gửi
+                    (Constant 1000000)
+                )
+                nextContract
+
+
+
+Viết trên Javascript
+--------------------------------
+
+import {
+    Address, Role, Account, Party, ada, lovelace, AvailableMoney, Constant, ConstantParam,
+    NegValue, AddValue, SubValue, MulValue, DivValue, ChoiceValue, TimeIntervalStart,
+    TimeIntervalEnd, UseValue, Cond, AndObs, OrObs, NotObs, ChoseSomething,
+    ValueGE, ValueGT, ValueLT, ValueLE, ValueEQ, TrueObs, FalseObs, Deposit,
+    Choice, Notify, Close, Pay, If, When, Let, Assert, SomeNumber, AccountId,
+    ChoiceId, Token, ValueId, Value, EValue, Observation, Bound, Action, Payee,
+    Case, Timeout, ETimeout, TimeParam, Contract
+} from 'marlowe-js';
+
+// Helper functions
+const absoluteDifference = (x, y) =>
+    Cond(ValueGT(SubValue(x, y), Constant(0)), SubValue(x, y), SubValue(y, x));
+
+const minimumDifference = (guesses, oraclePrice) =>
+    guesses.reduce((minDiff, [_, guess]) =>
+        Cond(ValueLT(absoluteDifference(guess, oraclePrice), minDiff),
+             absoluteDifference(guess, oraclePrice),
+             minDiff),
+        absoluteDifference(guesses[0][1], oraclePrice));
+
+const transferAllFunds = (players, winner, token, amount) =>
+    players.reduce((contract, player) => 
+        Pay(Role(player), Party(Role(winner)), token, amount, contract),
+        Close);
+
+// Main contract logic
+(function () {
+    const soluongnguoichoi = 4;
+    const danhsachnguoichoi = Array.from({ length: soluongnguoichoi }, (_, i) => `nguoichoi${i + 1}`);
+
+    const nguoichoinoptien = (players) =>
+        players.length === 0
+            ? nguoichoidoangia(danhsachnguoichoi, [])
+            : When([
+                Case(
+                    Deposit(
+                        Role(players[0]),
+                        Role(players[0]),
+                        Token("", ""),
+                        MulValue(ConstantParam("SoluongADA"), Constant(1000000))
+                    ),
+                    nguoichoinoptien(players.slice(1))
+                )
+            ], TimeParam("ThoiHanDeposit"), Close);
+
+    const nguoichoidoangia = (players, guesses) =>
+        players.length === 0
+            ? When([
+                Case(
+                    Choice(
+                        ChoiceId("Oracle", Role("Pricemarket")),
+                        [Bound(1, 1000000000000)]
+                    ),
+                    xacdinhnguoichienthang(guesses, ChoiceValue(ChoiceId("Oracle", Role("Pricemarket"))))
+                )
+            ], TimeParam("ThoiHanOracle"), Close)
+            : When([
+                Case(
+                    Choice(
+                        ChoiceId(`${players[0]} doangia`, Role(players[0])),
+                        [Bound(1, 1000000000000)]
+                    ),
+                    nguoichoidoangia(players.slice(1), [
+                        ...guesses,
+                        [players[0], ChoiceValue(ChoiceId(`${players[0]} doangia`, Role(players[0])))]
+                    ])
+                )
+            ], TimeParam("ThoiHandoangia"), Close);
+
+    const xacdinhnguoichienthang = (guesses, oraclePrice) =>
+        guesses.reduceRight(
+            (nextContract, [player, guess]) =>
+                If(
+                    OrObs(
+                        ValueEQ(absoluteDifference(guess, oraclePrice), minimumDifference(guesses, oraclePrice)),
+                        ValueEQ(guess, oraclePrice)
+                    ),
+                    transferAllFunds(
+                        danhsachnguoichoi,
+                        player,
+                        Token("", ""),
+                        MulValue(ConstantParam("SoluongADA"), Constant(1000000))
+                    ),
+                    nextContract
+                ),
+            Close
+        );
+
+    return nguoichoinoptien(danhsachnguoichoi);
+})();
