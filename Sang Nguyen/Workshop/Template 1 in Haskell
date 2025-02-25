@@ -1,0 +1,476 @@
+{-# LANGUAGE OverloadedStrings #-}
+module Example where
+
+import Language.Marlowe.Extended.V1
+
+main :: IO ()
+main = printJSON example
+
+
+{- Define a contract, Close is the simplest contract which just ends the contract straight away
+-}
+
+example :: Contract
+example = When
+    [Case
+        (Deposit
+            (Role "Buyer")
+            (Role "Buyer")
+            (Token "" "")
+            (ConstantParam "ProductMoney")
+        )
+        (Let
+            "ShippingFee_of_Buyer"
+            (DivValue
+                (ConstantParam "ProductMoney")
+                (Constant 100)
+            )
+            (Let
+                "DisputeFee_of_Buyer"
+                (DivValue
+                    (MulValue
+                        (ConstantParam "ProductMoney")
+                        (Constant 5)
+                    )
+                    (Constant 100)
+                )
+                (Let
+                    "PlatformFee"
+                    (DivValue
+                        (MulValue
+                            (ConstantParam "ProductMoney")
+                            (Constant 2)
+                        )
+                        (Constant 100)
+                    )
+                    (Let
+                        "ShippingFee_of_Seller"
+                        (DivValue
+                            (ConstantParam "ProductMoney")
+                            (Constant 100)
+                        )
+                        (Let
+                            "DisputeFee_of_Seller"
+                            (DivValue
+                                (MulValue
+                                    (ConstantParam "ProductMoney")
+                                    (Constant 5)
+                                )
+                                (Constant 100)
+                            )
+                            (Let
+                                "ProductCollateral"
+                                (ConstantParam "ProductMoney")
+                                (Let
+                                    "DisputeFee_of_ShippingCompany"
+                                    (DivValue
+                                        (MulValue
+                                            (ConstantParam "ProductMoney")
+                                            (Constant 5)
+                                        )
+                                        (Constant 100)
+                                    )
+                                    (When
+                                        [Case
+                                            (Deposit
+                                                (Role "Buyer")
+                                                (Role "Buyer")
+                                                (Token "" "")
+                                                (UseValue "ShippingFee_of_Buyer")
+                                            )
+                                            (When
+                                                [Case
+                                                    (Deposit
+                                                        (Role "Buyer")
+                                                        (Role "Buyer")
+                                                        (Token "" "")
+                                                        (UseValue "DisputeFee_of_Buyer")
+                                                    )
+                                                    (When
+                                                        [Case
+                                                            (Deposit
+                                                                (Role "Seller")
+                                                                (Role "Seller")
+                                                                (Token "" "")
+                                                                (UseValue "PlatformFee")
+                                                            )
+                                                            (When
+                                                                [Case
+                                                                    (Deposit
+                                                                        (Role "Seller")
+                                                                        (Role "Seller")
+                                                                        (Token "" "")
+                                                                        (UseValue "ShippingFee_of_Seller")
+                                                                    )
+                                                                    (When
+                                                                        [Case
+                                                                            (Deposit
+                                                                                (Role "Seller")
+                                                                                (Role "Seller")
+                                                                                (Token "" "")
+                                                                                (UseValue "DisputeFee_of_Seller")
+                                                                            )
+                                                                            (When
+                                                                                [Case
+                                                                                    (Deposit
+                                                                                        (Role "ShippingCompany")
+                                                                                        (Role "ShippingCompany")
+                                                                                        (Token "" "")
+                                                                                        (UseValue "ProductCollateral")
+                                                                                    )
+                                                                                    (When
+                                                                                        [Case
+                                                                                            (Deposit
+                                                                                                (Role "ShippingCompany")
+                                                                                                (Role "ShippingCompany")
+                                                                                                (Token "" "")
+                                                                                                (UseValue "DisputeFee_of_ShippingCompany")
+                                                                                            )
+                                                                                            (When
+                                                                                                [Case
+                                                                                                    (Choice
+                                                                                                        (ChoiceId
+                                                                                                            "Buyer received?"
+                                                                                                            (Role "Buyer")
+                                                                                                        )
+                                                                                                        [Bound 0 1]
+                                                                                                    )
+                                                                                                    (If
+                                                                                                        (ValueEQ
+                                                                                                            (ChoiceValue
+                                                                                                                (ChoiceId
+                                                                                                                    "Buyer received?"
+                                                                                                                    (Role "Buyer")
+                                                                                                                ))
+                                                                                                            (Constant 1)
+                                                                                                        )
+                                                                                                        (Pay
+                                                                                                            (Role "Buyer")
+                                                                                                            (Party (Role "ShippingCompany"))
+                                                                                                            (Token "" "")
+                                                                                                            (UseValue "ShippingFee_of_Buyer")
+                                                                                                            (When
+                                                                                                                [Case
+                                                                                                                    (Choice
+                                                                                                                        (ChoiceId
+                                                                                                                            "Are the goods of quality?"
+                                                                                                                            (Role "Buyer")
+                                                                                                                        )
+                                                                                                                        [Bound 0 1]
+                                                                                                                    )
+                                                                                                                    (If
+                                                                                                                        (ValueEQ
+                                                                                                                            (ChoiceValue
+                                                                                                                                (ChoiceId
+                                                                                                                                    "Are the goods of quality?"
+                                                                                                                                    (Role "Buyer")
+                                                                                                                                ))
+                                                                                                                            (Constant 1)
+                                                                                                                        )
+                                                                                                                        (Pay
+                                                                                                                            (Role "Buyer")
+                                                                                                                            (Party (Role "Seller"))
+                                                                                                                            (Token "" "")
+                                                                                                                            (ConstantParam "ProductMoney")
+                                                                                                                            (Pay
+                                                                                                                                (Role "Seller")
+                                                                                                                                (Party (Role "Platform"))
+                                                                                                                                (Token "" "")
+                                                                                                                                (UseValue "PlatformFee")
+                                                                                                                                Close 
+                                                                                                                            )
+                                                                                                                        )
+                                                                                                                        (When
+                                                                                                                            [Case
+                                                                                                                                (Choice
+                                                                                                                                    (ChoiceId
+                                                                                                                                        "Arbitration on goods' quality assurance from the Seller"
+                                                                                                                                        (Role "Platform")
+                                                                                                                                    )
+                                                                                                                                    [Bound 0 1]
+                                                                                                                                )
+                                                                                                                                (If
+                                                                                                                                    (ValueEQ
+                                                                                                                                        (ChoiceValue
+                                                                                                                                            (ChoiceId
+                                                                                                                                                "Arbitration on goods' quality assurance from the Seller"
+                                                                                                                                                (Role "Platform")
+                                                                                                                                            ))
+                                                                                                                                        (Constant 1)
+                                                                                                                                    )
+                                                                                                                                    (When
+                                                                                                                                        [Case
+                                                                                                                                            (Choice
+                                                                                                                                                (ChoiceId
+                                                                                                                                                    "Is the shipping company delivering well?"
+                                                                                                                                                    (Role "Platform")
+                                                                                                                                                )
+                                                                                                                                                [Bound 0 1]
+                                                                                                                                            )
+                                                                                                                                            (If
+                                                                                                                                                (ValueEQ
+                                                                                                                                                    (ChoiceValue
+                                                                                                                                                        (ChoiceId
+                                                                                                                                                            "Is the shipping company delivering well?"
+                                                                                                                                                            (Role "Platform")
+                                                                                                                                                        ))
+                                                                                                                                                    (Constant 1)
+                                                                                                                                                )
+                                                                                                                                                (Pay
+                                                                                                                                                    (Role "Buyer")
+                                                                                                                                                    (Party (Role "Seller"))
+                                                                                                                                                    (Token "" "")
+                                                                                                                                                    (ConstantParam "ProductMoney")
+                                                                                                                                                    (Pay
+                                                                                                                                                        (Role "Seller")
+                                                                                                                                                        (Party (Role "Platform"))
+                                                                                                                                                        (Token "" "")
+                                                                                                                                                        (UseValue "PlatformFee")
+                                                                                                                                                        (Pay
+                                                                                                                                                            (Role "Buyer")
+                                                                                                                                                            (Party (Role "Platform"))
+                                                                                                                                                            (Token "" "")
+                                                                                                                                                            (UseValue "DisputeFee_of_Buyer")
+                                                                                                                                                            Close 
+                                                                                                                                                        )
+                                                                                                                                                    )
+                                                                                                                                                )
+                                                                                                                                                (Pay
+                                                                                                                                                    (Role "ShippingCompany")
+                                                                                                                                                    (Party (Role "Seller"))
+                                                                                                                                                    (Token "" "")
+                                                                                                                                                    (UseValue "ProductCollateral")
+                                                                                                                                                    (Pay
+                                                                                                                                                        (Role "Seller")
+                                                                                                                                                        (Party (Role "Platform"))
+                                                                                                                                                        (Token "" "")
+                                                                                                                                                        (UseValue "PlatformFee")
+                                                                                                                                                        (Pay
+                                                                                                                                                            (Role "ShippingCompany")
+                                                                                                                                                            (Party (Role "Platform"))
+                                                                                                                                                            (Token "" "")
+                                                                                                                                                            (UseValue "DisputeFee_of_ShippingCompany")
+                                                                                                                                                            Close 
+                                                                                                                                                        )
+                                                                                                                                                    )
+                                                                                                                                                )
+                                                                                                                                            )]
+                                                                                                                                        (TimeParam "12.Time_Is the shipping company delivering well?")
+                                                                                                                                        Close 
+                                                                                                                                    )
+                                                                                                                                    (Pay
+                                                                                                                                        (Role "Seller")
+                                                                                                                                        (Party (Role "ShippingCompany"))
+                                                                                                                                        (Token "" "")
+                                                                                                                                        (UseValue "ShippingFee_of_Seller")
+                                                                                                                                        (Pay
+                                                                                                                                            (Role "Seller")
+                                                                                                                                            (Party (Role "Platform"))
+                                                                                                                                            (Token "" "")
+                                                                                                                                            (UseValue "PlatformFee")
+                                                                                                                                            (Pay
+                                                                                                                                                (Role "Seller")
+                                                                                                                                                (Party (Role "Platform"))
+                                                                                                                                                (Token "" "")
+                                                                                                                                                (UseValue "DisputeFee_of_Seller")
+                                                                                                                                                Close 
+                                                                                                                                            )
+                                                                                                                                        )
+                                                                                                                                    )
+                                                                                                                                )]
+                                                                                                                            (TimeParam "11.Time_Arbitration on goods' quality assurance from the Seller")
+                                                                                                                            Close 
+                                                                                                                        )
+                                                                                                                    )]
+                                                                                                                (TimeParam "10.Time_Are the goods of quality?")
+                                                                                                                (Pay
+                                                                                                                    (Role "Buyer")
+                                                                                                                    (Party (Role "Seller"))
+                                                                                                                    (Token "" "")
+                                                                                                                    (ConstantParam "ProductMoney")
+                                                                                                                    (Pay
+                                                                                                                        (Role "Seller")
+                                                                                                                        (Party (Role "Platform"))
+                                                                                                                        (Token "" "")
+                                                                                                                        (UseValue "PlatformFee")
+                                                                                                                        Close 
+                                                                                                                    )
+                                                                                                                )
+                                                                                                            )
+                                                                                                        )
+                                                                                                        (When
+                                                                                                            [Case
+                                                                                                                (Choice
+                                                                                                                    (ChoiceId
+                                                                                                                        "Has the seller delivered?"
+                                                                                                                        (Role "Seller")
+                                                                                                                    )
+                                                                                                                    [Bound 0 1]
+                                                                                                                )
+                                                                                                                (If
+                                                                                                                    (ValueEQ
+                                                                                                                        (ChoiceValue
+                                                                                                                            (ChoiceId
+                                                                                                                                "Has the seller delivered?"
+                                                                                                                                (Role "Seller")
+                                                                                                                            ))
+                                                                                                                        (Constant 1)
+                                                                                                                    )
+                                                                                                                    (When
+                                                                                                                        [Case
+                                                                                                                            (Choice
+                                                                                                                                (ChoiceId
+                                                                                                                                    "Has the seller provided delivery proof?"
+                                                                                                                                    (Role "Platform")
+                                                                                                                                )
+                                                                                                                                [Bound 0 1]
+                                                                                                                            )
+                                                                                                                            (If
+                                                                                                                                (ValueEQ
+                                                                                                                                    (ChoiceValue
+                                                                                                                                        (ChoiceId
+                                                                                                                                            "Has the seller provided delivery proof?"
+                                                                                                                                            (Role "Platform")
+                                                                                                                                        ))
+                                                                                                                                    (Constant 1)
+                                                                                                                                )
+                                                                                                                                (When
+                                                                                                                                    [Case
+                                                                                                                                        (Choice
+                                                                                                                                            (ChoiceId
+                                                                                                                                                "Has the shipping company provided delivery proof?"
+                                                                                                                                                (Role "Platform")
+                                                                                                                                            )
+                                                                                                                                            [Bound 0 1]
+                                                                                                                                        )
+                                                                                                                                        (If
+                                                                                                                                            (ValueEQ
+                                                                                                                                                (ChoiceValue
+                                                                                                                                                    (ChoiceId
+                                                                                                                                                        "Has the shipping company provided delivery proof?"
+                                                                                                                                                        (Role "Platform")
+                                                                                                                                                    ))
+                                                                                                                                                (Constant 1)
+                                                                                                                                            )
+                                                                                                                                            (Pay
+                                                                                                                                                (Role "Buyer")
+                                                                                                                                                (Party (Role "ShippingCompany"))
+                                                                                                                                                (Token "" "")
+                                                                                                                                                (UseValue "ShippingFee_of_Buyer")
+                                                                                                                                                (Pay
+                                                                                                                                                    (Role "Buyer")
+                                                                                                                                                    (Party (Role "Seller"))
+                                                                                                                                                    (Token "" "")
+                                                                                                                                                    (ConstantParam "ProductMoney")
+                                                                                                                                                    (Pay
+                                                                                                                                                        (Role "Seller")
+                                                                                                                                                        (Party (Role "Platform"))
+                                                                                                                                                        (Token "" "")
+                                                                                                                                                        (UseValue "PlatformFee")
+                                                                                                                                                        (Pay
+                                                                                                                                                            (Role "Buyer")
+                                                                                                                                                            (Party (Role "Platform"))
+                                                                                                                                                            (Token "" "")
+                                                                                                                                                            (UseValue "DisputeFee_of_Buyer")
+                                                                                                                                                            Close 
+                                                                                                                                                        )
+                                                                                                                                                    )
+                                                                                                                                                )
+                                                                                                                                            )
+                                                                                                                                            (Pay
+                                                                                                                                                (Role "ShippingCompany")
+                                                                                                                                                (Party (Role "Seller"))
+                                                                                                                                                (Token "" "")
+                                                                                                                                                (UseValue "ProductCollateral")
+                                                                                                                                                (Pay
+                                                                                                                                                    (Role "Seller")
+                                                                                                                                                    (Party (Role "Platform"))
+                                                                                                                                                    (Token "" "")
+                                                                                                                                                    (UseValue "PlatformFee")
+                                                                                                                                                    (Pay
+                                                                                                                                                        (Role "ShippingCompany")
+                                                                                                                                                        (Party (Role "Platform"))
+                                                                                                                                                        (Token "" "")
+                                                                                                                                                        (UseValue "DisputeFee_of_ShippingCompany")
+                                                                                                                                                        Close 
+                                                                                                                                                    )
+                                                                                                                                                )
+                                                                                                                                            )
+                                                                                                                                        )]
+                                                                                                                                    (TimeParam "12.Time_Has the shipping company provided delivery proof?")
+                                                                                                                                    Close 
+                                                                                                                                )
+                                                                                                                                (Pay
+                                                                                                                                    (Role "Seller")
+                                                                                                                                    (Party (Role "Platform"))
+                                                                                                                                    (Token "" "")
+                                                                                                                                    (UseValue "DisputeFee_of_Seller")
+                                                                                                                                    (Pay
+                                                                                                                                        (Role "Seller")
+                                                                                                                                        (Party (Role "ShippingCompany"))
+                                                                                                                                        (Token "" "")
+                                                                                                                                        (UseValue "ShippingFee_of_Seller")
+                                                                                                                                        Close 
+                                                                                                                                    )
+                                                                                                                                )
+                                                                                                                            )]
+                                                                                                                        (TimeParam "11.Time_Has the seller provided delivery proof?")
+                                                                                                                        Close 
+                                                                                                                    )
+                                                                                                                    Close 
+                                                                                                                )]
+                                                                                                            (TimeParam "10.Time_Has the seller delivered?")
+                                                                                                            Close 
+                                                                                                        )
+                                                                                                    )]
+                                                                                                (TimeParam "9.Time_Buyer received?")
+                                                                                                (Pay
+                                                                                                    (Role "Buyer")
+                                                                                                    (Party (Role "ShippingCompany"))
+                                                                                                    (Token "" "")
+                                                                                                    (UseValue "ShippingFee_of_Buyer")
+                                                                                                    (Pay
+                                                                                                        (Role "Buyer")
+                                                                                                        (Party (Role "Seller"))
+                                                                                                        (Token "" "")
+                                                                                                        (ConstantParam "ProductMoney")
+                                                                                                        (Pay
+                                                                                                            (Role "Seller")
+                                                                                                            (Party (Role "Platform"))
+                                                                                                            (Token "" "")
+                                                                                                            (UseValue "PlatformFee")
+                                                                                                            Close 
+                                                                                                        )
+                                                                                                    )
+                                                                                                )
+                                                                                            )]
+                                                                                        (TimeParam "8.ShippingCompany's Dispute fee deadline")
+                                                                                        Close 
+                                                                                    )]
+                                                                                (TimeParam "7.ShippingCompany's ProductCollateral deadline")
+                                                                                Close 
+                                                                            )]
+                                                                        (TimeParam "6.Seller's Dispute fee deadline")
+                                                                        Close 
+                                                                    )]
+                                                                (TimeParam "5.Seller's Shipping fee deadline")
+                                                                Close 
+                                                            )]
+                                                        (TimeParam "4.Seller's Platform fee deadline")
+                                                        Close 
+                                                    )]
+                                                (TimeParam "3.Buyer's Dispute fee deadline")
+                                                Close 
+                                            )]
+                                        (TimeParam "2.Buyer's Shipping fee deadline")
+                                        Close 
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )]
+    (TimeParam "1.Buyer's Product Money deadline")
+    Close 
